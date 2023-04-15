@@ -17,6 +17,7 @@ await agent.login({
 const MOON_EMOJI = ['🌕', '🌖', '🌗', '🌘', '🌒', '🌓', '🌙', '🌜', '🌝', '🌚'];
 const SUN_EMOJI = ['🌞', '🌅', '🌄', '🌇', '⛅️', '🌤️', '🌥️', '🌦️'];
 const STORM_EMOJI = ['🌧️', '🌨️', '⛈️', '🌩️', '🌪️'];
+const CLEAR_EMOJI = ['☁️', ' '];
 const BIRD_EMOJI = ['🦅', '🕊️', '🦆', '🦜', '🐥', '🦉'];
 const FLORA_EMOJI = ['🌱', '🌷', '🌻', '🍀', '🌹', '🌴', '🌱', '🌵', '🌳', '🍄', '🌾', '🎋'];
 // Function to get random emoji from an array
@@ -27,7 +28,8 @@ function getRandomEmoji(arr) {
 function printRandomEmojis() {
     console.log("Running printRandomEmojis...");
     const moonOrSun = Math.random() < 0.5 ? MOON_EMOJI : SUN_EMOJI;
-    const emojiArrays = [moonOrSun, STORM_EMOJI, BIRD_EMOJI];
+    const rainingOrClear = Math.random() < 0.5 ? STORM_EMOJI : CLEAR_EMOJI;
+    const emojiArrays = [moonOrSun, rainingOrClear, BIRD_EMOJI];
     const emojis = emojiArrays.map((arr) => getRandomEmoji(arr));
     // Add two random flora emojis to the last line
     const flora1 = getRandomEmoji(FLORA_EMOJI);
@@ -64,6 +66,6 @@ async function postEmojisToBluesky(emojiString) {
 printRandomEmojis();
 // Run this on a cron job
 const scheduleExpressionMinute = '* * * * *'; // Run once every minute for testing
-const scheduleExpressionHourly = '0 * * * *';
-const job = new CronJob(scheduleExpressionMinute, printRandomEmojis);
+const scheduleExpression = '0 */3 * * *'; // Run once every three hours in prod
+const job = new CronJob(scheduleExpression, printRandomEmojis);
 job.start();

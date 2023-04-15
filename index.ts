@@ -21,6 +21,7 @@ await agent.login({
 const MOON_EMOJI = ['🌕', '🌖','🌗','🌘','🌒','🌓','🌙','🌜','🌝','🌚']
 const SUN_EMOJI = ['🌞','🌅','🌄','🌇','⛅️','🌤️','🌥️','🌦️']
 const STORM_EMOJI = ['🌧️','🌨️','⛈️','🌩️', '🌪️']
+const CLEAR_EMOJI = ['☁️', ' ']
 const BIRD_EMOJI = ['🦅','🕊️','🦆','🦜','🐥','🦉']
 const FLORA_EMOJI = ['🌱','🌷','🌻','🍀','🌹','🌴','🌱','🌵','🌳','🍄','🌾','🎋']
 
@@ -33,7 +34,8 @@ function getRandomEmoji(arr: string[]): string {
 function printRandomEmojis(): string {
   console.log("Running printRandomEmojis...");
   const moonOrSun = Math.random() < 0.5 ? MOON_EMOJI : SUN_EMOJI;
-  const emojiArrays = [moonOrSun, STORM_EMOJI, BIRD_EMOJI];
+  const rainingOrClear = Math.random() < 0.5 ? STORM_EMOJI : CLEAR_EMOJI;
+  const emojiArrays = [moonOrSun, rainingOrClear, BIRD_EMOJI];
   const emojis = emojiArrays.map((arr) => getRandomEmoji(arr));
 
   // Add two random flora emojis to the last line
