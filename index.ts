@@ -5,14 +5,15 @@ import { CronJob } from 'cron';
 import * as process from 'process';
 
 dotenv.config();
+const port = process.env.PORT || "8080";
 
 // Create a Bluesky Agent 
 const agent = new BskyAgent({
   service: 'https://bsky.social',
 });
 await agent.login({
-  identifier: process.env.BSKY_USERNAME!,
-  password: process.env.BSKY_PASSWORD!,
+  identifier: process.env.BLUESKY_USERNAME!,
+  password: process.env.BLUESKY_PASSWORD!,
 });
 
 
@@ -43,7 +44,7 @@ function printRandomEmojis(): string {
     flora2 = getRandomEmoji(FLORA_EMOJI);
   }
   // Generate random positions and repetitions for the flora emojis
-  const positions = [0, 1, 2, 3].map(() => Math.floor(Math.random() * 20)).sort((a, b) => a - b);
+  const positions = [0, 1, 2, 3].map(() => Math.floor(Math.random() * 15)).sort((a, b) => a - b);
   const repetitions = [Math.floor(Math.random() * 3) + 1, Math.floor(Math.random() * 3) + 1];
 
   const floraLine = positions.map((position, index) => {
@@ -53,7 +54,7 @@ function printRandomEmojis(): string {
 
   let result = '';
   emojis.forEach((emoji, index) => {
-    const randomPosition = Math.floor(Math.random() * 20);
+    const randomPosition = Math.floor(Math.random() * 15);
     result += ' '.repeat(randomPosition) + emoji;
     if (index < emojis.length - 1) {
       result += '\n';
@@ -78,8 +79,8 @@ printRandomEmojis();
 
 // Run this on a cron job
 const scheduleExpressionMinute = '* * * * *'; // Run once every minute for testing
-const scheduleExpressionHourly = '0 * * * *'
+const scheduleExpression = '0 */3 * * *'; // Run once every three hours in prod
 
-const job = new CronJob(scheduleExpressionMinute, printRandomEmojis);
+const job = new CronJob(scheduleExpression, printRandomEmojis);
 
 job.start();
