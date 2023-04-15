@@ -16,6 +16,6 @@ The main function `printRandomEmojis()` will run once and the script will kick o
 
 ## Credit
 
-Thank you to [aliceisjustplaying](https://github.com/aliceisjustplaying/atproto-starter-kit/blob/main/index.ts) for the [helpful template](https://github.com/aliceisjustplaying/atproto-starter-kit/blob/main/index.ts)! 
+Thank you to [aliceisjustplaying](https://github.com/aliceisjustplaying) for the [helpful template](https://github.com/aliceisjustplaying/atproto-starter-kit/)! 
 
 Read Bluesky's documentation [here](https://github.com/bluesky-social/atproto/tree/main/packages/api).
